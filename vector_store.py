@@ -23,6 +23,10 @@ def add_documents(documents):
 def get_retriever():
     db = get_vector_store()
     return db.as_retriever(
-        search_type="similarity_score_threshold",
-        search_kwargs={"k": RETRIEVER_K, "score_threshold": RETRIEVER_SCORE_THRESHOLD}
+        search_type="mmr",
+        search_kwargs={
+            "k": RETRIEVER_K, 
+            "fetch_k": 10, 
+            "lambda_mult" : 0.8 #0 = max diversity, 1 = max relevance
+            }
     )
