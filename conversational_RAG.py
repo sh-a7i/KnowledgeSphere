@@ -18,9 +18,9 @@ def ask_question(user_query):
         search_query = user_query
         
     docs = get_retriever().invoke(search_query)
-    if len(docs) == 0 and chat_history:
-        docs = get_retriever().invoke(user_query)
-
+if len(docs) == 0 and chat_history:
+    docs = get_retriever().invoke(user_query)
+    
     # Safely extract and format page numbers
     extracted_pages = []
     for doc in docs:

@@ -1,5 +1,6 @@
 import pytesseract
 import os
+from Hybrid_retriever import refresh_bm25_index
 # 1. Force Windows to add Tesseract to the PATH (varies pc to pc depending on tesseract's file path and environment variables)
 os.environ["PATH"] += os.pathsep + r"C:\Program Files\Tesseract-OCR"
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe" 
@@ -65,3 +66,4 @@ def seperate_content_types(chunk):
     
     content_data['types'] = list(set(content_data['types']))
     return content_data
+
