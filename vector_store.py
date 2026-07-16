@@ -30,3 +30,6 @@ def get_retriever():
             "lambda_mult" : 0.8 #0 = max diversity, 1 = max relevance
             }
     )
+
+    
+    
