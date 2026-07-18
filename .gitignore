@@ -1,0 +1,16 @@
+# =========================
+# Secrets & Environments
+# =========================
+.env
+.venv
+.venv/
+multi_query.py
+Hybrid_retriever.py
+abc.py
+temp_ingest/
+stored_docx/
+conversational2.py
+
+
+
+
