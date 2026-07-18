@@ -1,5 +1,9 @@
 import pytesseract
 
+import os
+from Hybrid_retriever import refresh_bm25_index
+
+
 from unstructured.partition.pdf import partition_pdf
 from unstructured.chunking.title import chunk_by_title
 pytesseract.pytesseract.tesseract_cmd = (
@@ -61,3 +65,4 @@ def seperate_content_types(chunk):
     
     content_data['types'] = list(set(content_data['types']))
     return content_data
+
