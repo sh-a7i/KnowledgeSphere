@@ -28,13 +28,14 @@ def add_documents(documents):
 def get_retriever():
     db = get_vector_store()
     return db.as_retriever(
-        search_type="mmr",
+        search_type="similarity_score_threshold",
         search_kwargs={
-            "k": RETRIEVER_K, 
-            "fetch_k": 10, 
-            "lambda_mult" : 0.8 #0 = max diversity, 1 = max relevance
-            }
+            "k": 5,
+            "score_threshold": 0.3  # Only return chunks with cosine similarity ≥ 0.3
+        }
+        # search_kwargs={
+        #     "k": RETRIEVER_K, 
+        #     "fetch_k": 10, 
+        #     "lambda_mult" : 0.95 #0 = max diversity, 1 = max relevance
+        #     }
     )
-
-    
-    
