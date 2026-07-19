@@ -1,16 +1,17 @@
 import pytesseract
+
 import os
-# 1. Force Windows to add Tesseract to the PATH (varies pc to pc depending on tesseract's file path and environment variables)
-os.environ["PATH"] += os.pathsep + r"C:\Program Files\Tesseract-OCR"
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe" 
+from Hybrid_retriever import refresh_bm25_index
+
 
 from unstructured.partition.pdf import partition_pdf
 from unstructured.chunking.title import chunk_by_title
 pytesseract.pytesseract.tesseract_cmd = (
     r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 )
-def partition_document(file_path: str):
 
+
+def partition_document(file_path: str):  
     elements = partition_pdf(
         filename= file_path,
         strategy="hi_res",
@@ -74,3 +75,4 @@ def seperate_content_types(chunk):
 
     content_data['types'] = list(set(content_data['types']))
     return content_data
+

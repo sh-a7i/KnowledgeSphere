@@ -1,3 +1,4 @@
+
 import os, shutil
 from ingestion import partition_document, create_chunks_by_title
 from summarization import summarize_chunks
@@ -10,6 +11,7 @@ def ingest_document(file_path: str):
     chunks = create_chunks_by_title(elements)
     documents = summarize_chunks(chunks)
     add_documents(documents)
+    
     print("Ingestion completed successfully")
 
 
