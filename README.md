@@ -38,15 +38,16 @@ KnowledgeSphere is a document Q&A assistant built on a Retrieval-Augmented Gener
 
 ```
 RAG/
-├── app.py                  # CLI entry point (ingest + REPL Q&A loop)
-├── streamlit_app.py        # Web UI — chat interface, upload, citations, PDF viewer
-├── config.py                # Model names, retriever settings, paths
-├── ingestion.py              # PDF partitioning, chunking, content separation
-├── summarization.py          # AI-generated searchable chunk descriptions
+├── app.py                     # CLI entry point (ingest + REPL Q&A loop)
+├── streamlit_app.py           # Web UI — chat interface, upload, citations, PDF viewer
+├── config.py                  # Model names, retriever settings, paths
+├── ingestion.py               # PDF partitioning, chunking, content separation
+├── summarization.py           # AI summarization of table/image chunks (Groq text/vision)
 ├── vector_store.py            # Chroma + BM25 setup, add/delete/retrieve
-├── multi_query.py              # Query expansion, hybrid retrieval, RRF fusion
-├── conversational_RAG.py        # Question rewriting, retrieval orchestration, chat history
-├── generation.py                 # Final answer generation with page citations
+├── multi_query.py             # Query expansion, hybrid retrieval, RRF fusion
+├── conversational_RAG.py      # Question rewriting, retrieval orchestration, chat history
+├── generation.py              # Final answer generation with page citations
+├── retrieval_profiles.py      # translates UI sliders into retrieval
 ├── requirements.txt
 └── .env                            # API keys (not committed)
 ```
@@ -63,34 +64,35 @@ RAG/
 ### Installation
 
 ```bash
+#1 Clone the repository: 
 git clone https://github.com/<your-username>/RAG.git
-cd RAG
+cd KnowledgeSphere
 
-python -m venv venv
+#2 Create and activate a virtual environment:  
 # Windows
+python -m venv venv
 .\venv\Scripts\Activate.ps1
+
 # macOS/Linux
+python3 -m venv .venv
 source venv/bin/activate
 
+#3 Install dependencies:  
 pip install -r requirements.txt
 ```
 
 ### Configure environment variables
 
-Create a `.env` file in the project root:
-
+#4 Create a `.env` file and add the required API keys: 
 ```
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-If Tesseract isn't on your system PATH, also set:
-
-```
-TESSERACT_PATH=C:\Program Files\Tesseract-OCR\tesseract.exe
-```
+#5 Local installation of Tesseract OCR (https://tesseract-ocr.github.io/tessdoc/Installation.html)
 
 ### Run the web app
 
+#6 Launch the application:
 ```bash
 streamlit run streamlit_app.py
 ```
@@ -105,10 +107,15 @@ python app.py
 
 ## 🧪 Usage
 
-1. Open the sidebar → **Manage Knowledge Base** → upload a PDF → **Process Document**.
-2. Wait for ingestion to complete (progress is shown live).
-3. Ask a question in the chat box.
-4. Click any `📄 Page X` button under an answer to view that exact page of the source PDF.
+1. Launch the Streamlit application in a web browser.
+2. Navigate to the sidebar under Manage Knowledge Base and upload a PDF 
+3. Click Process Document and wait for the ingestion pipeline to extract text, tables, and images and build the vector database.
+4. Adjust the Search Focus slider to prioritize semantic understanding or keyword matching, depending on the retrieval requirements and the Answer Style slider to choose between concise, direct responses and more detailed, exploratory explanations.
+5. Enter a question related to the uploaded document in the chat interface.
+6. The generated response is provided along with citations. Click any page number button beneath the generated answer to view the source text in the embedded PDF viewer.
+7. Continue asking follow-up questions. The system maintains conversation history to support context-aware interactions without requiring the user to restate previous queries.
+8. Click on ‘Clear Database’ to start afresh with new documents.
+
 
 ---
 
