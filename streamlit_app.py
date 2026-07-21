@@ -280,6 +280,14 @@ for message in st.session_state.chat_history:
             pages = message.additional_kwargs.get("source_pages", [])
             render_sources(f"hist_{id(message)}", message.content, pages)
 
+#disclaimer
+
+st.markdown(
+    "<p style='text-align: center; color: #94a3b8; font-size: 0.75rem; margin-bottom: 0.3rem;'>"
+    "Responses reflect the content of the uploaded documents and should not be interpreted as objective facts beyond those sources."
+    "</p>",
+    unsafe_allow_html=True
+)
 
 #chat Input
 
