@@ -3,6 +3,7 @@
 KnowledgeSphere is a document Q&A assistant built on a Retrieval-Augmented Generation (RAG) pipeline. Upload a PDF, and KnowledgeSphere parses its text, tables, and images, indexes it for hybrid search, and lets you ask natural-language questions — with every answer citing the exact source page, and a clickable in-app PDF viewer that jumps straight to it.
 
 ---
+<span style="color:red">**⚠️ WARNING: We advise users to avoid uploading highly sensitive or confidential information unless they're set up with a secure enterprise agreement.**</span>
 
 ## ✨ Features
 
@@ -122,9 +123,12 @@ python app.py
 
 ## 👥 Team
 
-| **RAG Pipeline & Backend Engineer** | Document ingestion, chunking, hybrid retrieval (vector + BM25), query fusion, LLM prompt/answer generation, citation logic | Hiya Ratra |
-| **Frontend & UX Engineer**          | Streamlit chat interface, PDF viewer integration, citation UI, ingestion progress experience, styling | Angel Dhiman |
-| **Data & Infrastructure Engineer**  | Vector store management, embedding pipeline, environment/config setup, testing, deployment, documentation | Aashna Sharma |
+| **RAG Pipeline & Backend Engineer**  | 
+Document ingestion, chunking, hybrid retrieval (vector + BM25), query fusion, LLM prompt/answer generation, citation logic |
+| **Frontend & UX Engineer**          |
+Streamlit chat interface, PDF viewer integration, citation UI, ingestion progress experience, styling | Angel Dhiman |
+| **Data & Infrastructure Engineer**  | 
+Vector store management, embedding pipeline, environment/config setup, testing, deployment, documentation |
 
 
 ## 🤝 Contributing
