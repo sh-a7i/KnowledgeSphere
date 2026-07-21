@@ -1,8 +1,8 @@
 import os
 from dotenv import load_dotenv
 load_dotenv()
-
-CHROMA_DIR = "db/chromadb"   
+TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+CHROMA_DIR = "db/chromadb" 
 LLM_MODEL_NAME = "llama-3.3-70b-versatile"
 VISION_MODEL_NAME = "qwen/qwen3.6-27b"
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"

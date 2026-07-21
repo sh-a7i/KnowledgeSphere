@@ -1,9 +1,16 @@
-.env 
+# Environments
+venv/
+__pycache__/
 
-debug.py
-multi_modal_rag.py
-db/
+# Secrets and Configs
+.env
+.streamlit/secrets.toml
+
+# App Data
 temp_ingest/
 Hybrid_retriever.py
 untrack/
 __pycache__/
+chroma_db/
+uploads/
+*.pdf
