@@ -130,7 +130,7 @@ python app.py
 
 ## 👥 Team
 
-| **RAG Pipeline & Backend Engineer** | Document ingestion, chunking, embedding pipeline, environment/config setup, testing, query fusion, LLM prompt/answer generation, response style functioning | Aashna Sharma |
+| **RAG Pipeline & Backend Engineer** | Document ingestion, chunking, embedding pipeline, environment/config setup, testing, query fusion, LLM prompt/answer generation, response style functioning, RAGAS Evaluation | Aashna Sharma |
 
 | **Frontend & UX Engineer**          | Streamlit chat interface, PDF viewer integration, citation UI, , citation logic, ingestion progress experience, styling | Angel Dhiman |
 
