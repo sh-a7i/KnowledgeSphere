@@ -206,3 +206,21 @@ hr {
     margin-top: 14px;
     font-weight: 500;
 }
+/* Disclaimer Above the Dark Blue Bottom Box */
+[data-testid="stBottom"] {
+    position: relative; 
+    overflow: visible !important; /* Ensures the text pushed outside isn't clipped */
+}
+
+[data-testid="stBottom"]::before {
+    content: "Responses reflect the content of the uploaded documents and should not be interpreted as objective facts beyond those sources.";
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(242, 235, 217, 0.6);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    pointer-events: none;
+}

@@ -3,6 +3,7 @@
 KnowledgeSphere is a document Q&A assistant built on a Retrieval-Augmented Generation (RAG) pipeline. Upload a PDF, and KnowledgeSphere parses its text, tables, and images, indexes it for hybrid search, and lets you ask natural-language questions — with every answer citing the exact source page, and a clickable in-app PDF viewer that jumps straight to it.
 
 ---
+<span style="color:red">**⚠️ WARNING: We advise users to avoid uploading highly sensitive or confidential information unless they're set up with a secure enterprise agreement.**</span>
 
 ## ✨ Features
 
