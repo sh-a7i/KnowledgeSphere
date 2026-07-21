@@ -130,9 +130,11 @@ python app.py
 
 ## 👥 Team
 
-| **RAG Pipeline & Backend Engineer** | Document ingestion, chunking, hybrid retrieval (vector + BM25), query fusion, LLM prompt/answer generation, citation logic | Hiya Ratra |
-| **Frontend & UX Engineer**          | Streamlit chat interface, PDF viewer integration, citation UI, ingestion progress experience, styling | Angel Dhiman |
-| **Data & Infrastructure Engineer**  | Vector store management, embedding pipeline, environment/config setup, testing, deployment, documentation | Aashna Sharma |
+| **RAG Pipeline & Backend Engineer** | Document ingestion, chunking, embedding pipeline, environment/config setup, testing, query fusion, LLM prompt/answer generation, response style functioning | Aashna Sharma |
+
+| **Frontend & UX Engineer**          | Streamlit chat interface, PDF viewer integration, citation UI, , citation logic, ingestion progress experience, styling | Angel Dhiman |
+
+| **Data & Infrastructure Engineer**  | Vector store management, hybrid retrieval (vector + BM25), RRF Fusion, documentation | Hiya Ratra |
 
 
 ## 🤝 Contributing
@@ -142,3 +144,9 @@ python app.py
 3. Commit your changes (`git commit -m "Add your feature"`)
 4. Push to your fork (`git push origin feature/your-feature`)
 5. Open a Pull Request
+
+### Debugging notes
+
+If retrieval seems to be returning content from documents other than the one currently loaded, or repeated chunks, this usually means the vector store wasn't cleared before a new ingestion. Use "Clear Database" in the sidebar, or call clear_all_documents() from vector_store.py, before re-testing.
+
+If a chunk's embedding seems to under-represent a specific term despite it being in the source text, check chunking granularity first (CHUNK_MAX_CHARACTERS / CHUNK_COMBINE_UNDER_N_CHARS) before assuming a retrieval-threshold or summarization-prompt issue — overly large chunks that merge multiple concepts are the most common cause.
