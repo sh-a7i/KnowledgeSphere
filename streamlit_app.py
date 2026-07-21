@@ -264,10 +264,7 @@ with st.sidebar:
 #main chat
 
 st.markdown("<h1 style='text-align: center; color: #fcd34d; margin-top: 3vh; margin-bottom: 0;'>KnowledgeSphere</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 1.1rem; margin-top: 0.3rem;'>AI-Powered RAG Knowledge Assistant</p>", unsafe_allow_html=True)
-
-if not st.session_state.chat_history:
-    st.markdown("<h2 style='text-align: center; color: #fcd34d; margin-top: 15vh;'>How can I help you with your documents today?</h2>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 1.1rem; margin-top: 0.3rem;'>How can I help you with your documents today?</p>", unsafe_allow_html=True)
 
 for message in st.session_state.chat_history:
     if isinstance(message, HumanMessage):
@@ -279,15 +276,6 @@ for message in st.session_state.chat_history:
 
             pages = message.additional_kwargs.get("source_pages", [])
             render_sources(f"hist_{id(message)}", message.content, pages)
-
-#disclaimer
-
-st.markdown(
-    "<p style='text-align: center; color: #94a3b8; font-size: 0.75rem; margin-bottom: 0.3rem;'>"
-    "Responses reflect the content of the uploaded documents and should not be interpreted as objective facts beyond those sources."
-    "</p>",
-    unsafe_allow_html=True
-)
 
 #chat Input
 
