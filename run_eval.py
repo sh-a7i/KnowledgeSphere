@@ -1,0 +1,83 @@
+# run_eval.py
+from dotenv import load_dotenv
+load_dotenv()
+
+import time
+import json
+from conversational_RAG import ask_question
+import json
+with open("eval_dataset_assigned.json") as f:
+    eval_questions = json.load(f)
+
+from ragas import evaluate
+from ragas.metrics import faithfulness, answer_relevancy, context_precision
+from ragas.llms import LangchainLLMWrapper
+from ragas.embeddings import LangchainEmbeddingsWrapper
+from datasets import Dataset
+
+from langchain_groq import ChatGroq
+from langchain_huggingface import HuggingFaceEmbeddings
+from config import LLM_MODEL_NAME, EMBEDDING_MODEL_NAME
+
+
+def get_ragas_judge():
+    """RAGAS defaults to OpenAI — this wires it to use Groq (text model)
+    and your existing HuggingFace embedding model instead."""
+    judge_llm = LangchainLLMWrapper(ChatGroq(model=LLM_MODEL_NAME, temperature=0))
+    judge_embeddings = LangchainEmbeddingsWrapper(HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME))
+    return judge_llm, judge_embeddings
+
+
+def run_pipeline_on_test_set():
+    results = []
+    for item in eval_questions:
+        print(f"Running: {item['question']}")
+        start = time.perf_counter()
+        answer, source_pages, contexts = ask_question(item["question"], return_contexts=True)
+        latency_ms = (time.perf_counter() - start) * 1000
+
+        results.append({
+            "question": item["question"],
+            "answer": answer,
+            "contexts": contexts,
+            "ground_truth": item["ground_truth"],
+            "category": item["category"],
+            "latency_ms": latency_ms,
+        })
+
+    with open("eval_results.json", "w") as f:
+        json.dump(results, f, indent=2)
+
+    return results
+
+
+def score_with_ragas(results):
+    judge_llm, judge_embeddings = get_ragas_judge()
+
+    dataset = Dataset.from_list([
+        {
+            "question": r["question"],
+            "answer": r["answer"],
+            "contexts": r["contexts"],
+            "ground_truth": r["ground_truth"],
+        }
+        for r in results
+    ])
+
+    scores = evaluate(
+        dataset,
+        metrics=[faithfulness, answer_relevancy, context_precision],
+        llm=judge_llm,
+        embeddings=judge_embeddings,
+    )
+    print(scores)
+
+    avg_latency = sum(r["latency_ms"] for r in results) / len(results)
+    print(f"\nAverage latency: {avg_latency:.0f} ms")
+
+    return scores
+
+
+if __name__ == "__main__":
+    results = run_pipeline_on_test_set()
+    scores = score_with_ragas(results)

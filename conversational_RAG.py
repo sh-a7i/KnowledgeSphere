@@ -9,7 +9,7 @@ from retrieval_profiles import DEFAULT_PROFILE
 chat_history = []
 
 
-def ask_question(user_query, retrieval_profile=None):
+def ask_question(user_query, retrieval_profile=None, return_contexts=False):
     profile = {**DEFAULT_PROFILE, **(retrieval_profile or {})}
 
     if chat_history:
@@ -55,4 +55,9 @@ def ask_question(user_query, retrieval_profile=None):
     chat_history.append(AIMessage(content=answer, additional_kwargs={"source_pages": source_pages}))
 
     print(f"Answer: {answer}")
-    return answer, source_pages
+
+    if return_contexts:
+        contexts = [doc.page_content for doc in docs]
+        return answer, source_pages, contexts
+    
+    return answer, source_pages, docs
