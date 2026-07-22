@@ -4,8 +4,6 @@ Run this once all teammates have sent their eval_results_<name>.json files.
 Merges every eval_results_*.json in this folder into one combined dataset,
 then scores it with RAGAS (judge model wired to Groq, not OpenAI).
 
-Usage:
-    python merge_and_score.py
 
 """
 
@@ -17,7 +15,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from ragas import evaluate
-from ragas.metrics import faithfulness, answer_relevancy, context_precision
+from ragas.metrics import faithfulness, AnswerRelevancy, context_precision
+from ragas.run_config import RunConfig
 from ragas.llms import LangchainLLMWrapper
 from ragas.embeddings import LangchainEmbeddingsWrapper
 from datasets import Dataset
@@ -56,7 +55,7 @@ def merge_results():
 def score_with_ragas(all_results):
     judge_llm = LangchainLLMWrapper(ChatGroq(model=LLM_MODEL_NAME, temperature=0))
     judge_embeddings = LangchainEmbeddingsWrapper(HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME))
-
+    answer_relevancy_metric = AnswerRelevancy(strictness=1) 
     dataset = Dataset.from_list([
         {
             "question": r["question"],
@@ -69,9 +68,10 @@ def score_with_ragas(all_results):
 
     scores = evaluate(
         dataset,
-        metrics=[faithfulness, answer_relevancy, context_precision],
+        metrics=[faithfulness, answer_relevancy_metric, context_precision],
         llm=judge_llm,
         embeddings=judge_embeddings,
+        run_config=RunConfig(max_workers=1),  
     )
     print("\n=== RAGAS Scores (overall) ===")
     print(scores)
