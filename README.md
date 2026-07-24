@@ -143,12 +143,13 @@ python app.py
 
 ## 👥 Team
 
-| **RAG Pipeline & Backend Engineer** | Document ingestion, chunking, embedding pipeline, environment/config setup, testing, query fusion, LLM prompt/answer generation, response style functioning, RAGAS Evaluation | Aashna Sharma |
+## 👥 Team
 
-| **Frontend & UX Engineer**          | Streamlit chat interface, PDF viewer integration, citation UI, citation logic, ingestion progress experience, styling, RAGAS testing | Angel Dhiman |
-
-| **Data & Infrastructure Engineer**  | Vector store management, hybrid retrieval (vector + BM25), RRF Fusion, documentation | Hiya Ratra |
-
+| Name | Role | Contributions |
+|---|---|---|
+| **Aashna Sharma** — *Team Leader* | RAG Pipeline & Backend Engineer | Document ingestion, chunking, embedding pipeline, environment/config setup, testing, multi-query integration, retrieval, LLM prompt/answer generation, response style functioning, RAGAS evaluation |
+| **Angel Dhiman** | Frontend & UI/UX Engineer | Streamlit chat interface, PDF viewer feature integration, citation UI, citation logic, ingestion progress experience, styling, Jupyter notebook for RAGAS, RAGAS testing, documentation |
+| **Hiya Ratra** | Data & Infrastructure Engineer | Vector store management, hybrid retrieval (vector + BM25), RRF fusion, documentation |
 
 ## 🤝 Contributing
 
