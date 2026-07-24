@@ -143,8 +143,6 @@ python app.py
 
 ## 👥 Team
 
-## 👥 Team
-
 | Name | Role | Contributions |
 |---|---|---|
 | **Aashna Sharma** — *Team Leader* | RAG Pipeline & Backend Engineer | Document ingestion, chunking, embedding pipeline, environment/config setup, testing, multi-query integration, retrieval, LLM prompt/answer generation, response style functioning, RAGAS evaluation |
