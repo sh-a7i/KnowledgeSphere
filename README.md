@@ -37,19 +37,31 @@ KnowledgeSphere is a document Q&A assistant built on a Retrieval-Augmented Gener
 ## 📁 Project Structure
 
 ```
-RAG/
-├── app.py                     # CLI entry point (ingest + REPL Q&A loop)
-├── streamlit_app.py           # Web UI — chat interface, upload, citations, PDF viewer
-├── config.py                  # Model names, retriever settings, paths
-├── ingestion.py               # PDF partitioning, chunking, content separation
-├── summarization.py           # AI summarization of table/image chunks (Groq text/vision)
-├── vector_store.py            # Chroma + BM25 setup, add/delete/retrieve
-├── multi_query.py             # Query expansion, hybrid retrieval, RRF fusion
-├── conversational_RAG.py      # Question rewriting, retrieval orchestration, chat history
-├── generation.py              # Final answer generation with page citations
-├── retrieval_profiles.py      # translates UI sliders into retrieval
-├── requirements.txt
-└── .env                            # API keys (not committed)
+KnowledgeSphere/
+├── .streamlit/            # Streamlit config (theme, server settings)
+├── RAGAS Testing/         # Evaluation suite — dataset, eval scripts, RAGAS scoring, notebook
+├── db/
+│   └── chromadb/          # Persisted vector store (gitignored)
+├── temp_ingest/            # Scratch folder during upload/ingestion
+├── venv/                   # Virtual environment (gitignored)
+├── .gitignore               # Excludes venv, db, temp files, .env
+├── Attention.pdf             # Benchmark test document
+├── CNAME                      # Custom domain config
+├── README.md                   # Project documentation
+├── app.py                       # CLI entry point — ingest + Q&A loop
+├── check.py                      # Diagnostic — prints vector store doc count
+├── config.py                      # Model names, paths, retriever settings
+├── conversational_RAG.py           # Core RAG orchestration + chat history
+├── generation.py                    # Builds prompts, generates cited answers
+├── ingestion.py                      # PDF parsing, chunking, OCR
+├── multi_query.py                     # Query expansion + hybrid retrieval fusion
+├── requirements.txt                    # Python dependencies
+├── retrieval_profiles.py                # Tunable retrieval configs
+├── sample_ques.txt                       # Example test questions
+├── streamlit_app.py                       # Web UI — chat + PDF viewer
+├── style.css                               # UI styling
+├── summarization.py                         # AI-generated searchable chunk summaries
+└── vector_store.py                           # Chroma + BM25 setup and retrieval
 ```
 
 ---
